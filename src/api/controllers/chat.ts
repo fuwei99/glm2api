@@ -17,6 +17,13 @@ import environment from "@/lib/environment.ts";
 const MODEL_NAME = "glm";
 // 默认的智能体ID，GLM4
 const DEFAULT_ASSISTANT_ID = "65940acff94777010aa6b796";
+// 模型ID映射
+const MODEL_ID_MAP: Record<string, string> = {
+  "glm-4.7": "69cad3e3c69fbd8a9e3ed912",
+  "glm-4.6": "65940acff94777010aa6b796",
+  "glm-5": "65940acff94777010aa6b796",
+  "glm-4-plus": "65940acff94777010aa6b796",
+};
 // 签名密钥（官网变化记得更新）
 const SIGN_SECRET = environment.signSecret || "8a1317a7468aa3ad86e997d08f3f31cb";
 // access_token有效期
@@ -273,7 +280,7 @@ async function createCompletion(
       logger.info('使用【沉思（DeepResearch）】模型');
     }
 
-    let assistantId = /^[a-z0-9]{24,}$/.test(model) ? model : DEFAULT_ASSISTANT_ID;
+    let assistantId = /^[a-z0-9]{24,}$/.test(model) ? model : (MODEL_ID_MAP[model] || DEFAULT_ASSISTANT_ID);
 
     // 请求流
     const token = await acquireToken(refreshToken);
@@ -403,7 +410,7 @@ async function createCompletionStream(
       logger.info('使用【沉思（DeepResearch）】模型');
     }
 
-    let assistantId = /^[a-z0-9]{24,}$/.test(model) ? model : DEFAULT_ASSISTANT_ID;
+    let assistantId = /^[a-z0-9]{24,}$/.test(model) ? model : (MODEL_ID_MAP[model] || DEFAULT_ASSISTANT_ID);
 
     // 请求流
     const token = await acquireToken(refreshToken);

@@ -3,6 +3,13 @@ import _ from 'lodash';
 // 支持的模型列表，基于官方API返回的模型
 const SUPPORTED_MODELS = [
     {
+        "id": "glm-5",
+        "name": "GLM-5",
+        "object": "model",
+        "owned_by": "glm-free-api",
+        "description": "智谱清言最新旗舰模型 - GLM-5"
+    },
+    {
         "id": "glm-4.7",
         "name": "GLM-4.7",
         "object": "model",
